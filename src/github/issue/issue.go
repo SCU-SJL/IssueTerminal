@@ -3,7 +3,6 @@ package issue
 import "time"
 
 const GitHubIssueAPI = "https://api.github.com/repos"
-const ssh = "e8e02848161f0e6129b831019e717f53d30b9ba0"
 
 type IssuesList struct {
 	Issues []Issue

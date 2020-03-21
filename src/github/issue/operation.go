@@ -4,7 +4,9 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net/http"
+	"os"
 )
 
 func GetIssues(username, repo string) (*IssuesList, error) {
@@ -31,7 +33,8 @@ func GetIssues(username, repo string) (*IssuesList, error) {
 }
 
 func CreateIssue(username, repo, title, body, label string) string {
-	queryUrl := "/" + username + "/" + repo + "/" + "issues" + "?" + "access_token=" + ssh
+	token := GetAccessToken()
+	queryUrl := "/" + username + "/" + repo + "/" + "issues" + "?" + "access_token=" + token
 	jsonStr := "{" +
 		"\"title\": " + "\"" + title + "\"," +
 		"\"body\": " + "\"" + body + "\"," +
@@ -53,4 +56,12 @@ func CreateIssue(username, repo, title, body, label string) string {
 	}
 
 	return resp.Status
+}
+
+func GetAccessToken() string {
+	token, err := ioutil.ReadFile("../../../resource/access_token.txt")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Open File Error: %v", err)
+	}
+	return string(token)
 }
