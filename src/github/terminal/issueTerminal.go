@@ -39,7 +39,7 @@ var github = flag.Bool("github", false, "Description of github api parameters:\n
 	"good first issue, help wanted, invalid, question, wontfix}\n"+
 	"if you want to use 'good first issue' \\ 'help wanted', please enter 'gfi' or 'hw'\n\n"+
 	"[Assignees]: Assignees of the issue, which is an array of user ids\n\n"+
-	"Visit https://developer.github.com/v3/issues/ to get more information.")
+	"Visit https://developer.github.com/v3/issues/ to get more information.\n")
 
 func main() {
 	flag.Parse()
