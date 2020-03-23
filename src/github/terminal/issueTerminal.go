@@ -29,15 +29,17 @@ var update = flag.Bool("update", false, "update an issue in a repository\n"+
 	"FOR EXAMPLE: -update\n")
 
 var github = flag.Bool("github", false, "Description of github api parameters:\n"+
-	"[Username / Organization]: Owner of the repository\n"+
-	"[Repository]: Name of the repository\n"+
-	"[Title]: Title of the issue\n"+
-	"[Body]: Contents of the issue\n"+
-	"[Milestone]: Milestone of the issue, which is a number\n"+
-	"[State]: State of the issue, which is 'closed' or 'open'\n"+
-	"[Labels]: Labels of the issue, including: {bug, documentation, duplicate, enhancement"+
+	"[Username / Organization]: Owner of the repository\n\n"+
+	"[Repository]: Name of the repository\n\n"+
+	"[Title]: Title of the issue\n\n"+
+	"[Body]: Contents of the issue\n\n"+
+	"[Milestone]: Milestone of the issue, which is a number\n\n"+
+	"[State]: State of the issue, which is 'closed' or 'open'\n\n"+
+	"[Labels]: Labels of the issue, including: {bug, documentation, duplicate, enhancement, "+
 	"good first issue, help wanted, invalid, question, wontfix}\n"+
-	"[Assignees]: Assignees of the issue, which is an array of user ids\n")
+	"if you want to use 'good first issue' \\ 'help wanted', please enter 'gfi' or 'hw'\n\n"+
+	"[Assignees]: Assignees of the issue, which is an array of user ids\n\n"+
+	"Visit https://developer.github.com/v3/issues/ to get more information.")
 
 func main() {
 	flag.Parse()

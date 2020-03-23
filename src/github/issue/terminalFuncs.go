@@ -62,6 +62,10 @@ func Put() {
 	fmt.Print("Labels [\"n\" for null]: ")
 	labels := readParam("Labels", in)
 	labelArr := strings.Fields(labels)
+	for _, s := range labelArr {
+		s = strings.Replace(s, "gfi", "good first issue", -1)
+		s = strings.Replace(s, "hw", "help wanted", -1)
+	}
 
 	fmt.Print("Assignees [\"n\" for null]: ")
 	assignees := readParam("Assignees", in)
@@ -124,6 +128,10 @@ func Update() {
 	fmt.Print("Labels [\"n\" for null]: ")
 	labels := readParam("Labels", in)
 	labelArr := strings.Fields(labels)
+	for _, s := range labelArr {
+		s = strings.Replace(s, "gfi", "good first issue", -1)
+		s = strings.Replace(s, "hw", "help wanted", -1)
+	}
 
 	fmt.Print("Assignees [\"n\" for null]: ")
 	assignees := readParam("Assignees", in)
