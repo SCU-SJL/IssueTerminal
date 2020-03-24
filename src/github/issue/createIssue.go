@@ -2,6 +2,7 @@ package issue
 
 import (
 	"bytes"
+	"github/util"
 	"log"
 	"net/http"
 )
@@ -15,14 +16,13 @@ type CreateParam struct {
 }
 
 func CreateIssue(username, repo string, jsonStr []byte) string {
-	queryUrl := GetQueryUrl(username, repo)
+	queryUrl := util.GetQueryUrl(username, repo)
 	req, err := http.NewRequest("POST", GitHubIssueAPI+queryUrl, bytes.NewBuffer(jsonStr))
 	if err != nil {
 		log.Fatal(err)
-		return "bad json format"
 	}
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Authorization", token)
+	req.Header.Set("Authorization", util.Token)
 
 	client := &http.Client{}
 	resp, err := client.Do(req)

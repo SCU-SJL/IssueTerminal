@@ -4,12 +4,22 @@ import (
 	"flag"
 	"fmt"
 	"github/issue"
+	"github/repository"
+	"github/util"
 	"os"
 )
 
 var tip = flag.Bool("tip", false, "please save your github token into access_token.txt\n"+
 	"if you want to update / close / create issues\n"+
 	"and make sure issueTerminal.exe and access_token.txt is in the same directory\n")
+
+var newRepo = flag.Bool("repo", false, "Create a new repository on github\n"+
+	"terminal will enter interactive mode automatically\n"+
+	"FOR EXAMPLE: -repo\n")
+
+var delRepo = flag.Bool("del", false, "Delete a repository\n"+
+	"HTTP 204 no content represents success\n"+
+	"FOR EXAMPLE: -del [username / organization] [repository]\n")
 
 var get = flag.Bool("get", false, "list issues in a repository\n"+
 	"FOR EXAMPLE: -get [username / organization] [repository]\n")
@@ -57,7 +67,7 @@ func main() {
 	}
 
 	if illegalFlag() {
-		issue.Invalid()
+		util.Invalid()
 		return
 	}
 
@@ -70,11 +80,15 @@ func main() {
 			issue.Interact("close")
 		} else if *update {
 			issue.Update()
+		} else if *newRepo {
+			repository.Create()
+		} else if *delRepo {
+			repository.Interactive()
 		}
 	} else {
 		if *get {
 			if len(os.Args) != 4 {
-				issue.Invalid()
+				util.Invalid()
 				return
 			}
 			issue.Get(os.Args[2], os.Args[3])
@@ -82,12 +96,20 @@ func main() {
 			issue.Put()
 		} else if *closed {
 			if len(os.Args) != 5 {
-				issue.Invalid()
+				util.Invalid()
 				return
 			}
 			issue.Close(os.Args[2], os.Args[3], os.Args[4])
 		} else if *update {
 			issue.Update()
+		} else if *newRepo {
+			repository.Create()
+		} else if *delRepo {
+			if len(os.Args) != 4 {
+				util.Invalid()
+				return
+			}
+			repository.Delete(os.Args[2], os.Args[3])
 		}
 	}
 }
@@ -104,6 +126,12 @@ func illegalFlag() bool {
 		count++
 	}
 	if *update {
+		count++
+	}
+	if *newRepo {
+		count++
+	}
+	if *delRepo {
 		count++
 	}
 	return count != 1

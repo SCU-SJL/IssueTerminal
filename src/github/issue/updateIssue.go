@@ -2,6 +2,7 @@ package issue
 
 import (
 	"bytes"
+	"github/util"
 	"log"
 	"net/http"
 )
@@ -16,13 +17,13 @@ type UpdateParam struct {
 }
 
 func UpdateIssue(username, repo, id string, jsonStr []byte) string {
-	queryUrl := GetQueryUrl(username, repo) + "/" + id
+	queryUrl := util.GetQueryUrl(username, repo) + "/" + id
 	req, err := http.NewRequest("PATCH", GitHubIssueAPI+queryUrl, bytes.NewBuffer(jsonStr))
 	if err != nil {
 		log.Fatal(err)
 	}
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Authorization", token)
+	req.Header.Set("Authorization", util.Token)
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
