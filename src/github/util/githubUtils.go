@@ -15,7 +15,10 @@ func GetAccessToken() string {
 	if err != nil {
 		_, _ = fmt.Fprintf(os.Stderr, "Open File Error: %v", err)
 	}
-	return string(token)
+	res := string(token)
+	res = strings.ReplaceAll(res, "\r\n", "")
+	res = strings.ReplaceAll(res, "\n", "")
+	return res
 }
 
 func GetQueryUrl(username, repo string) string {

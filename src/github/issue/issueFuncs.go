@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"encoding/json"
 	"fmt"
-	"github/util"
+	"issue_term/src/github/util"
 	"log"
 	"os"
 	"strconv"

@@ -2,7 +2,7 @@ package issue
 
 import (
 	"bytes"
-	"github/util"
+	"issue_term/src/github/util"
 	"log"
 	"net/http"
 )
