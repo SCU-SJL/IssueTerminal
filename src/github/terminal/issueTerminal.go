@@ -3,9 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github/issue"
-	"github/repository"
-	"github/util"
+	"issue_term/src/github/issue"
+	"issue_term/src/github/repository"
+	"issue_term/src/github/util"
 	"os"
 )
 
